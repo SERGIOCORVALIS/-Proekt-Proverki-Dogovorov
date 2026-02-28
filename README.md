@@ -1,214 +1,161 @@
-# Система Анализа Юридических Документов
+Legal Document Analysis System
+MVP for automatic analysis of legal documents, identifying risks and non-standard wording.
 
-MVP для автоматического анализа юридических документов с выявлением рисков и нестандартных формулировок.
-
-## Технологический стек
-
-- **Фронтенд**: Next.js + TypeScript + Tailwind CSS
-- **Бэкенд**: FastAPI + Python
-- **База данных**: PostgreSQL
-- **ИИ/NLP**: Hugging Face Transformers + spaCy
-- **Инфраструктура**: Docker
-
-## Ключевые функции MVP
-
-1. **Регистрация и Аутентификация** - создание аккаунта юриста
-2. **Загрузка Документов** - поддержка .docx и .pdf форматов
-3. **Анализ и Отчет** - автоматический анализ с подсветкой рисков
-4. **Панель Управления** - список проанализированных документов
-
-## Структура проекта
-
-```
-├── frontend/          # Next.js приложение
-│   ├── app/          # App Router страницы
-│   ├── components/   # React компоненты
-│   ├── hooks/        # Custom hooks
-│   ├── lib/          # Утилиты и API
-│   └── types/        # TypeScript типы
-├── backend/           # FastAPI сервер
-│   ├── app/          # Основное приложение
-│   │   ├── core/     # Конфигурация и безопасность
-│   │   ├── models/   # SQLAlchemy модели
-│   │   ├── schemas/  # Pydantic схемы
-│   │   ├── routers/  # API роутеры
-│   │   └── services/ # Бизнес-логика
-│   └── requirements.txt
-├── docker-compose.yml # Docker конфигурация
-├── start_local.bat    # Локальный запуск (Windows)
-├── mock_backend.py    # Mock backend для демонстрации
+Tech Stack
+Frontend: Next.js + TypeScript + Tailwind CSS
+Backend: FastAPI + Python
+Database: PostgreSQL
+AI/NLP: Hugging Face Transformers + spaCy
+Infrastructure: Docker
+Key MVP Features
+Registration and Authentication - Create a lawyer account
+Document Upload - Support for .docx and .pdf formats
+Analysis and Report - Automatic analysis with risk highlighting
+Control Panel - List of analyzed documents
+Project Structure
+├── frontend/ # Next.js application
+│ ├── app/ # App Router pages
+│ ├── components/ # React components
+│ ├── hooks/ # Custom hooks
+│ ├── lib/ # Utilities and API
+│ └── types/ # TypeScript types
+├── backend/ # FastAPI server
+│ ├── app/ # Main application
+│ │ ├── core/ # Configuration and security
+│ │ ├── models/ # SQLAlchemy models
+│ │ ├── schemas/ # Pydantic schemas
+│ │ ├── routers/ # API routers
+│ │ └── services/ # Business logic
+│ └── requirements.txt
+├── docker-compose.yml # Docker configuration
+├── start_local.bat # Local run (Windows)
+├── mock_backend.py # Mock backend for demonstration
 └── README.md
-```
+Quick Start
+Option 1: Local run (recommended for demonstration)
+Make sure you have:
 
-## Быстрый старт
+Python 3.11+
+Node.js 18+
+Run the project with a single command:
 
-### Вариант 1: Локальный запуск (рекомендуется для демонстрации)
-
-1. Убедитесь, что установлены:
-   - Python 3.11+
-   - Node.js 18+
-
-2. Запустите проект одной командой:
-```bash
 # Windows
 start_local.bat
-```
+Open a browser: http://localhost:3000
 
-3. Откройте браузер: http://localhost:3000
+Log in with test credentials:
 
-4. Войдите с тестовыми данными:
-   - Email: `test@example.com`
-   - Пароль: `password123`
+Email: test@example.com
+Password: password123
+Option 2: Run with Docker
+Make sure Docker Desktop is running
 
-### Вариант 2: Запуск с Docker
+Run the project:
 
-1. Убедитесь, что Docker Desktop запущен
-
-2. Запустите проект:
-```bash
 # Windows
 start.bat
 
 # Linux/Mac
 ./start.sh
-```
-
-### Вариант 3: Ручной запуск
-
-#### 1. Клонирование и настройка
-
-```bash
-# Клонируйте репозиторий
-git clone <repository-url>
+Option 3: Manual run
+1. Cloning and setup
+# Clone the
+git repository clone <repository-url>
 cd legal-document-analyzer
-```
-
-#### 2. Запуск с Docker
-
-```bash
-# Запуск всех сервисов
+2. Run with Docker
+# Start all services
 docker-compose up -d
 
-# Проверка статуса
+# Check status
 docker-compose ps
 
-# Просмотр логов
+# View logs
 docker-compose logs -f
-```
-
-### 3. Запуск в режиме разработки
-
-#### Бэкенд:
-```bash
+3. Run in development mode
+Backend:
 cd backend
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn main:app --reload
-```
-
-#### Фронтенд:
-```bash
+Frontend:
 cd frontend
 npm install
 npm run dev
-```
+Access the application
+Frontend: http://localhost:3000
+Backend API: http://localhost:8000
+API Documentation: http://localhost:8000/docs
+Database: localhost:5432
+API Endpoints
+Authentication
+POST /auth/register - user registration
+POST /auth/login - login
+GET /auth/me - current user information
+Documents
+POST /documents/upload - document upload
+GET /documents - user document list
+GET /documents/{id} - document information
+GET /documents/{id}/analysis - document analysis results
+Functionality
+1. Registration and Login
+Lawyer Account Creation
+JWT Authentication
+Secure Routes
+2. Document Upload
+Supported Format: .docx, .pdf
+Maximum Size: 10MB
+Drag & Drop Interface
+File Validation
+3. Document Analysis
+Text Extraction from Documents
+Rule-Based Analysis (Playbook)
+Risk Identification by Level:
+High Risk: Critical Statements
+Medium Risk: Potential Issues
+Low Risk: Recommendations for improvement
+4. Control Panel
+List of all documents
+Processing statuses
+Risk statistics
+Detailed results view
+Analysis rules (Playbook)
+The system analyzes documents based on built-in rules:
 
-## Доступ к приложению
-
-- **Фронтенд**: http://localhost:3000
-- **Бэкенд API**: http://localhost:8000
-- **API Документация**: http://localhost:8000/docs
-- **База данных**: localhost:5432
-
-## API Endpoints
-
-### Аутентификация
-- `POST /auth/register` - регистрация пользователя
-- `POST /auth/login` - вход в систему
-- `GET /auth/me` - информация о текущем пользователе
-
-### Документы
-- `POST /documents/upload` - загрузка документа
-- `GET /documents` - список документов пользователя
-- `GET /documents/{id}` - информация о документе
-- `GET /documents/{id}/analysis` - результаты анализа документа
-
-## Функциональность
-
-### 1. Регистрация и Вход
-- Создание аккаунта юриста
-- JWT аутентификация
-- Защищенные маршруты
-
-### 2. Загрузка Документов
-- Поддержка форматов: .docx, .pdf
-- Максимальный размер: 10MB
-- Drag & Drop интерфейс
-- Валидация файлов
-
-### 3. Анализ Документов
-- Извлечение текста из документов
-- Анализ на основе правил (playbook)
-- Выявление рисков по уровням:
-  - **Высокий риск**: Критические формулировки
-  - **Средний риск**: Потенциальные проблемы
-  - **Низкий риск**: Рекомендации по улучшению
-
-### 4. Панель Управления
-- Список всех документов
-- Статусы обработки
-- Статистика по рискам
-- Детальный просмотр результатов
-
-## Правила анализа (Playbook)
-
-Система анализирует документы на основе встроенных правил:
-
-### Высокие риски:
-- Условия о невозврате средств
-- Односторонний отказ от договора
-- Высокие штрафы (>10%)
-- Неограниченная ответственность
-
-### Средние риски:
-- Неопределенный срок договора
-- Изменение условий без согласия
-- Неограниченная конфиденциальность
-
-### Низкие риски:
-- Отсутствие форс-мажорных обстоятельств
-- Одностороннее решение споров
-
-## Разработка
-
-### Структура бэкенда:
-- `app/core/` - конфигурация, безопасность
-- `app/models/` - SQLAlchemy модели БД
-- `app/schemas/` - Pydantic схемы для валидации
-- `app/routers/` - API endpoints
-- `app/services/` - бизнес-логика
-
-### Структура фронтенда:
-- `app/` - страницы (App Router)
-- `components/` - переиспользуемые компоненты
-- `hooks/` - custom React hooks
-- `lib/` - утилиты и API клиент
-- `types/` - TypeScript типы
-
-## Развертывание
-
-### Production настройки:
-1. Измените SECRET_KEY в .env
-2. Настройте PostgreSQL для production
-3. Используйте reverse proxy (nginx)
-4. Настройте SSL сертификаты
-5. Используйте Docker для контейнеризации
-
-## Лицензия
-
+High risks:
+Non-refundable clauses
+Unilateral termination of the contract
+High penalties (>10%)
+Unlimited liability
+Medium risks:
+Indefinite contract term
+Change of terms without consent
+Unlimited confidentiality
+Low risks:
+Absence of force majeure
+Unilateral dispute resolution
+Development
+Backend structure:
+app/core/ - configuration, security
+app/models/ - SQLAlchemy database models
+app/schemas/ - Pydantic schemas for validation
+app/routers/ - API endpoints
+app/services/ - business logic
+Frontend structure:
+app/ - pages (App) Router)
+components/ - reusable components
+hooks/ - custom React hooks
+lib/ - utilities and API client
+types/ - TypeScript types
+Deployment
+Production settings:
+Change SECRET_KEY in .env
+Configure PostgreSQL for production
+Use reverse proxy (nginx)
+Configure SSL certificates
+Use Docker for containerization
+License
 MIT License
 
-## Поддержка
-
-Для вопросов и предложений создавайте Issues в репозитории.
+Support
+For questions and suggestions, create issues in the repository.
